@@ -7,7 +7,6 @@ struct Trie {
     int count;
 };
 
-// Insert a word into the trie
 void insert(struct Trie **ppTrie, char *word) {
     if (*ppTrie == NULL) {
         *ppTrie = malloc(sizeof(struct Trie));
@@ -39,7 +38,6 @@ int numberOfOccurances(struct Trie *pTrie, char *word) {
     return pTrie->count;
 }
 
-// Deallocate the trie and all of its nodes
 struct Trie *deallocateTrie(struct Trie *pTrie) {
     if (pTrie != NULL) {
         for (int i = 0; i < 26; i++) {
@@ -53,11 +51,9 @@ struct Trie *deallocateTrie(struct Trie *pTrie) {
 }
 
 int main(void) {
-    // Read the number of words in the dictionary
     int n;
     scanf("%d", &n);
 
-    // Parse each word and insert it into the trie
     struct Trie *trie = NULL;
     char word[101];
     for (int i = 0; i < n; i++) {
@@ -65,18 +61,15 @@ int main(void) {
         insert(&trie, word);
     }
 
-    // Check the number of occurrences of each word in the trie
     char *pWords[] = {"notaword", "ucf", "no", "note", "corg"};
     for (int i = 0; i < 5; i++) {
         printf("\t%s : %d\n", pWords[i], numberOfOccurances(trie, pWords[i]));
     }
 
-    // Deallocate the trie and check for errors
     trie = deallocateTrie(trie);
     if (trie != NULL) {
         printf("There is an error in this program\n");
     }
 
-    // Return 0 to indicate successful program execution
     return 0;
 }
